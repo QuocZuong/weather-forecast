@@ -4,6 +4,7 @@ const inputBox = document.querySelector(".search-box input")
 const weatherBox = document.querySelector(".weather-box")
 const weatherDetails = document.querySelector(".weather-details")
 const error = document.querySelector(".not-found")
+
 search.addEventListener("click", function(){
     main();
 })
@@ -22,17 +23,20 @@ function main(){
         return;
     }
 
+    // fetch API 
     fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${APIKey}&units=metric`).then(response =>response.json()).then(
         json=>{
             if(json.cod === '404'){
                 container.style.height = '400px'
                 weatherBox.style.display = "none"
+                weatherDetails.style.display = "none"
                 error.style.display = "block";
                 error.classList.add("fade-in");
                 return;
             }
             error.style.display = 'none';
             error.classList.remove('fade-in')
+
             const image = document.querySelector('.weather-box img')
             const temperature = document.querySelector(".weather-box .temperature")
             const description = document.querySelector(".weather-box .description")
@@ -40,7 +44,7 @@ function main(){
             const wind = document.querySelector(".weather-details .wind span")
             console.log(json.weather[0].main)
 
-            switch(json.weather[0].main){
+            switch(json.weather[0].main){ // set image for weather-box
                 case "Clear":
                   image.src = '../images/clear.png';
                   break
@@ -70,7 +74,9 @@ function main(){
 
             weatherBox.style.display = ''
             weatherDetails.style.display = ''
-            weatherBox.classList.add('fade-in')
+
+            // add class fade-in
+            weatherBox.classList.add('fade-in') 
             weatherDetails.classList.add('fade-in') 
             container.style.height = '590px'
         }
