@@ -16,7 +16,7 @@ inputBox.addEventListener("keydown", function(){
     }
 })
 function main(){
-    const APIKey = "b7da4b6caf028fccca0965c1d67a49d2";
+    const APIKey = "hihihi";
     const city = document.querySelector(".search-box input").value;
 
     if(city === ""){
